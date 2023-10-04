@@ -4,7 +4,7 @@ import logger from "./logger";
 
 const params = {...config.db}
 
-export const connectDB = ():Promise<mysql.Connection> =>new Promise((resolve, reject)=>{
+const connectDB = ():Promise<mysql.Connection> =>new Promise((resolve, reject)=>{
     const connection = mysql.createConnection(params)
     connection.connect(err=>{
         if(err){
@@ -15,7 +15,7 @@ export const connectDB = ():Promise<mysql.Connection> =>new Promise((resolve, re
     })
 })
 
-export const Query = (connection: mysql.Connection, query: string) =>new Promise((resolve, reject)=>{
+const Query = (connection: mysql.Connection, query: string) =>new Promise((resolve, reject)=>{
     connection.query(query, (err, res)=>{
         if(err){
             reject(err)
@@ -29,12 +29,25 @@ export const Exec = (query: string) =>new Promise((resolve, reject)=>{
     connectDB().then(connection=>{
         Query(connection, query)
         .then(res=>{
-            connection.destroy()
-            return res
+            console.log({res})
+            closeConnection(connection)
+            resolve(res)
         })
         .catch(err=>{
             logger.Error(err)
-            connection.destroy()
+            closeConnection(connection)
+            reject(err)
+            return;
         })
     })
+    .catch(err=>{throw Error(err)})
 }) 
+
+const closeConnection = (connection: mysql.Connection) =>{
+    connection.end(err=>{
+        if(err){
+            logger.Error(err)
+            return;
+        }
+    })
+}

@@ -1,0 +1,1 @@
+export type token_type={tokenId: number, uid: string}
