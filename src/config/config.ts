@@ -10,6 +10,7 @@ const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || "Academia@Edu123!"
 
 const SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || "localhost";
 const SERVER_PORT = process.env.SERVER_PORT || 7000
+const SERVER_SECRET = process.env.SERVER_SECRET || "MY_SERVER_SECRET"
 
 const MYSQL = {
     host: MYSQL_HOST_NAME,
@@ -20,7 +21,8 @@ const MYSQL = {
 
 const SERVER = {
     hostname: SERVER_HOSTNAME,
-    port: SERVER_PORT
+    port: SERVER_PORT,
+    secret: SERVER_SECRET
 }
 
 const config = {
