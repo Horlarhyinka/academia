@@ -2,3 +2,4 @@ dev.txt
 Dockerfile
 .env
 node_modules
+backup.sql

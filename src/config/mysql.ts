@@ -29,7 +29,6 @@ export const Exec = (query: string) =>new Promise((resolve, reject)=>{
     connectDB().then(connection=>{
         Query(connection, query)
         .then(res=>{
-            console.log({res})
             closeConnection(connection)
             resolve(res)
         })

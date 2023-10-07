@@ -34,7 +34,7 @@ class User implements user_int{
 
     public static createJWT = (userId: number)=>{
         const tokenObj = {userId}
-        return jwt.sign(tokenObj, config.server.secret)
+        return jwt.sign(tokenObj, config.server.secret, {expiresIn: "2d"})
     }
 
     public static verifyJWT = (token: string)=>{
