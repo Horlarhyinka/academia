@@ -9,7 +9,8 @@ const transport = nodemailer.createTransport({
         pass: config.services.mailer.pass
     },
     host: config.services.mailer.host,
-    port: 465,
+    port: 25,
+    service: config.services.mailer.service
 })
 
 const sendMail = async(target: string, filename: string, data: any)=>{

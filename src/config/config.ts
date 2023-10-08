@@ -16,6 +16,7 @@ const MAIL_USER = process.env.MAIL_USER
 const MAIL_PASS = process.env.MAIL_PASS
 const MAIL_ADDRESS = process.env.MAIL_ADDRESS || "testmailaddress@gmail.com"
 const MAIL_HOST = process.env.MAIL_HOST || "smtp.mailtrap.io"
+const MAIL_SERVICE = process.env.MAIL_SERVICE || "mailtrap"
 
 const MYSQL = {
     host: MYSQL_HOST_NAME,
@@ -34,7 +35,8 @@ const MAILER = {
     user: MAIL_USER,
     pass: MAIL_PASS,
     address: MAIL_ADDRESS,
-    host: MAIL_HOST
+    host: MAIL_HOST,
+    service: MAIL_SERVICE
 }
 
 const services = {

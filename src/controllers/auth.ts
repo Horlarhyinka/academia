@@ -53,7 +53,7 @@ export const resetPassword = catchAsync(async(req: Request, res: Response)=>{
     const {password} = req.body;
     if(!password)return res.status(400).json({message: "provide new password"})
     if(!token)return res.status(400).json({message: "password reset token is not provided"})
-    const currToken = ((await Exec(`SELECT * FROM ResetTokens WHERE expireTime<=${Date.now()} AND token="${token}";`)) as {userId:number, token: string, expireTime: number}[])[0]
+    const currToken = ((await Exec(`SELECT * FROM ResetTokens WHERE expireTime>=${Date.now()} AND token="${token}";`)) as {userId:number, token: string, expireTime: number}[])[0]
     if(!currToken)return res.status(404).json({message: "invalid/expired token"});
     const currUser = await User.getOne(currToken.userId)
     const updated = await User.update(currUser.userId, {password})
