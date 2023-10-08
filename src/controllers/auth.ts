@@ -59,3 +59,4 @@ export const resetPassword = catchAsync(async(req: Request, res: Response)=>{
     const updated = await User.update(currUser.userId, {password})
     return res.status(200).json({user:{...updated,password:undefined}, token: User.createJWT(updated.userId)})
 })
+
